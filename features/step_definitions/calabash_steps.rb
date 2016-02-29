@@ -18,3 +18,24 @@ end
 Then(/^I see Logged screen$/) do
   wait_for_activity("LoggedActivity", timeout: 5)
 end
+
+Given(/^I am a logged user$/) do
+  step "I am on the Login screen"
+  step "I enter my credentials toto and truc"
+  step "I press login button"
+end
+
+When(/^I scroll down to item (\d+)$/) do |arg1|
+  sleep(1)
+  query("* id:'listView'",{:smoothScrollToPosition=>arg1})
+  sleep(1)
+end
+
+When(/^I press item (\d+)$/) do |arg1|
+  pending
+end
+
+Then(/^I see detail page$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+

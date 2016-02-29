@@ -4,11 +4,8 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp">
 
-    <TextView android:id="@+id/loggedTextView"
+    <android.support.v7.widget.ListViewCompat
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Welcome on this super app !"
-        />
+        android:layout_height="match_parent"/>
 </LinearLayout>
