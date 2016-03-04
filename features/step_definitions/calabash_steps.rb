@@ -1,7 +1,7 @@
 require 'calabash-android/calabash_steps'
 
 Given(/^I am on the Login screen$/) do
-  wait_for_activity("MainActivity", timeout: 5)
+  wait_for_activity("LoginActivity", timeout: 5)
   raise 'Login button not found' if query("* marked:'loginButton' {text CONTAINS[c] 'Login'}").empty?
   check_element_exists("* marked:'loginButton'")
 end
@@ -16,7 +16,7 @@ When(/^I press login button$/) do
 end
 
 Then(/^I see Logged screen$/) do
-  wait_for_activity("LoggedActivity", timeout: 5)
+  wait_for_activity("ListActivity", timeout: 5)
 end
 
 Given(/^I am a logged user$/) do
@@ -25,17 +25,17 @@ Given(/^I am a logged user$/) do
   step "I press login button"
 end
 
-When(/^I scroll down to item (\d+)$/) do |arg1|
+When(/^I scroll down to item (\d+)$/) do |itemName|
   sleep(1)
-  query("* id:'listView'",{:smoothScrollToPosition=>arg1})
+  query("* id:'listView'",{:smoothScrollToPosition=>itemName})
   sleep(1)
 end
 
-When(/^I press item (\d+)$/) do |arg1|
-  pending
+When(/^I press item (\d+)$/) do |itemName|
+  tap_when_element_exists("* {text CONTAINS 'element #{itemName}'}")
 end
 
-Then(/^I see detail page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I see item (\d+) detail screen$/) do |itemName|
+  wait_for_activity("DetailActivity", timeout: 5)
 end
 
