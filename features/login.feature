@@ -5,8 +5,10 @@ Feature: Login feature
     Given I am on the Login screen
     When I enter my credentials <login> and <password>
     And I press login button
-    Then I see Logged screen
+    Then I see <result>
 
   Examples:
-    | login | password |
-    | user1 | password1 |
+    | login | password | result |
+    ||| errors |
+    | user2 | password2 | snackbar error |
+    | user1 | password1 | Logged screen |

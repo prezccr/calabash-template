@@ -15,8 +15,18 @@ When(/^I press login button$/) do
   tap_when_element_exists("* marked:'loginButton'")
 end
 
-Then(/^I see Logged screen$/) do
-  wait_for_activity("ListActivity", timeout: 5)
+Then(/^I see (.*)$/) do | result |
+  case result
+  when /^errors$/ui
+    raise 'Error Email not found' if query("* id:'emailEditTextView'", :getError).empty?
+    raise 'Error Password not found' if query("* id:'passwordEditTextView'", :getError).empty?
+  when /^snackbar error$/ui
+    wait_for_text("Invalid user")
+  when /^Logged screen$/ui
+    wait_for_activity("ListActivity", timeout: 5)
+  when /^item 42 detail screen$/ui
+    wait_for_activity("DetailActivity", timeout: 5)
+  end
 end
 
 Given(/^I am a logged user$/) do
@@ -35,7 +45,5 @@ When(/^I press item (\d+)$/) do |itemName|
   tap_when_element_exists("* {text CONTAINS 'element #{itemName}'}")
 end
 
-Then(/^I see item (\d+) detail screen$/) do |itemName|
-  wait_for_activity("DetailActivity", timeout: 5)
-end
+
 
