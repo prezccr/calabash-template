@@ -37,7 +37,7 @@ end
 
 When(/^I scroll down to item (\d+)$/) do |itemName|
   sleep(1)
-  query("* id:'listView'",{:smoothScrollToPosition=>itemName})
+  scroll_to_row("* id:'listView'", 42)
   sleep(1)
 end
 
